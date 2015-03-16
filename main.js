@@ -106,7 +106,9 @@ define(function(require, exports, module) {
 	addAlias('jpeg',  'jpg');
 	addIcon('tiff',   'ion-image', '#ff4000');
 	addIcon('ico',    'ion-image', '#b6d2d1');
-	addIcon('svg',    'ion-image', '#c0c5eb');
+	//addIcon('svg',    'ion-image', '#c0c5eb');
+    addIcon('svg',    'ion-image', 'rgb(239, 195, 99)');
+    addIcon('webp',   'ion-image', 'rgb(117, 231, 231)');
 
 	addIcon('gif',    'ion-images', '#aaecc0');
 
