@@ -1,4 +1,4 @@
-define(function(require, exports, module) {
+define(function (require, exports, module) {
 	var fileInfo = {};
 
 	function addIcon(extension, icon, color, size) {
@@ -15,7 +15,7 @@ define(function(require, exports, module) {
 		if (extension === '') {
 			return {
 				color: '#fff',
-				icon: '\uf12f'
+				icon: 'ion-document'
 			};
 		}
 
@@ -49,8 +49,8 @@ define(function(require, exports, module) {
 	addIcon('styl',   'ion-pound', '#b3d107', 12);
 
 	// JavaScript
-	addIcon('js',     'icon-c', '#e5a228', 13);
-	addIcon('ts',     'icon-c', '#0074c1', 13);
+	addIcon('js',     'file-icon-c', '#e5a228', 13);
+	addIcon('ts',     'file-icon-c', '#0074c1', 13);
 	addIcon('coffee', 'ion-coffee', '#425d99');
 	addIcon('json',   'ion-ios-gear', '#e5a228');
 	addIcon('ls',     'ion-beaker', '#369bd7');
@@ -62,26 +62,27 @@ define(function(require, exports, module) {
 	// Java
 	addIcon('java',   'ion-coffee', '#5382A1');
 	addAlias('class', 'java');
-	addIcon('scala',  'ion-navicon-round icon-rotated', '#72d0eb');
+	addIcon('scala',  'ion-navicon-round file-icon-rotated', '#72d0eb');
 	addIcon('groovy', 'ion-ios-star', '#4298b8');
-	
+
 	// Lua
 	addIcon('lua',    'ion-record', '#00207d', 14);
-	
+
 	// Clojure
 	addIcon('clj',    'ion-aperture', '#63b132');
-	
+
 	// Visual Basic
 	addIcon('vb',     'ion-ios-infinite', '#486dae');
 	addIcon('vbs',    'ion-ios-infinite', '#3d047e');
-	
+
 	// C-family
-	addIcon('hx',     'icon-c', '#ea8220', 13);
-	addIcon('pl',     'icon-c', '#a4c5eb', 13);
-	addIcon('c',      'icon-c', '#a8b9cc', 13);
-	addIcon('cpp',    'icon-c', '#ffd232', 13);
-	addIcon('cs',     'icon-c', '#5bb552', 13);
-	addIcon('swift',  'icon-c', '#f16830', 13);
+	addIcon('hx',     'file-icon-c', '#ea8220', 13);
+	addIcon('pl',     'file-icon-c', '#a4c5eb', 13);
+	addIcon('c',      'file-icon-c', '#a8b9cc', 13);
+	addIcon('cpp',    'file-icon-c', '#ffd232', 13);
+	addIcon('cs',     'file-icon-c', '#5bb552', 13);
+	addIcon('swift',  'file-icon-c', '#f16830', 13);
+    addIcon('dart',   'file-icon-c', '#36bfb6', 13);
 
 	// Ruby
 	addIcon('rb',     'ion-heart', '#9b111e');
@@ -155,6 +156,8 @@ define(function(require, exports, module) {
 	addAlias('jscsrc', 'project');
 	addAlias('jshintrc', 'project');
 	addAlias('csslintrc', 'project');
+	addAlias('htmlhintrc', 'project');
+	addAlias('xmlhintrc', 'project');
 	addAlias('todo', 'project');
 	addAlias('classpath', 'project');
 	addAlias('properties', 'project');
@@ -169,28 +172,46 @@ define(function(require, exports, module) {
 	addIcon('npmignore', 'ion-minus-circled', '#cb3837', 14);
 	addIcon('slugignore', 'ion-minus-circled', '#0da064', 14);
 	addIcon('yml',   'ion-navicon', '#008000');
+	addAlias('yaml', 'yml');
 	addIcon('sqf',   'ion-wand', '#b9e11f');
+	addAlias('map', 'json');
 
-	var ExtensionUtils = brackets.getModule("utils/ExtensionUtils");
+	// LaTeX
+	addIcon('tex', 'ion-document-text', '#262686');
+	addAlias('bib', 'tex');
+	addAlias('sty', 'tex');
 
-	var FileTreeView = brackets.getModule("project/FileTreeView");
+	//Singular Types
+	addIcon('applescript', 'ion-social-apple', '#afafaf');
+	addIcon('textile', 'ion-quote', '#6f8696');
+	addIcon('matlab', 'ion-clipboard', '#014495');
+	addIcon('lisp', 'ion-ios-paperplane', '#f8c63d');
+	addIcon('xsl', 'ion-code', '#68217a');
+	addIcon('tcl', 'ion-code', '#c3b15f');
+	addIcon('rst', 'ion-ios-paper', '#6f8696');
+	addIcon('d', 'ion-contrast', '#960000');
+	addIcon('r', 'ion-ios-analytics', '#8495C0');
+
+	var ExtensionUtils = brackets.getModule('utils/ExtensionUtils');
+
+	var FileTreeView = brackets.getModule('project/FileTreeView');
 	var WorkingSetView = brackets.getModule('project/WorkingSetView');
-    
-    // Before Brackets 1.1.0, icons had a hack that the margin was set to -10000px, which was corrected by the padding.
-    // This was removed in Brackets 1.1.0
-    var version = /([0-9]+)\.([0-9]+)\.([0-9]+)/.exec(brackets.metadata.version);
-    if ((version[1] === "0") || (version[1] === "1" && version[2] === "0")) { // version[1] is major, version[2] is minor
-        $('body').addClass('icons-margin-correction');
-    }
 
-	ExtensionUtils.loadStyleSheet(module, "styles/style.css");
-	ExtensionUtils.loadStyleSheet(module, "styles/ionicons.min.css");
-	
-	var provider = function(entry) {
+	// Before Brackets 1.1.0, icons had a hack that the margin was set to -10000px, which was corrected by the padding.
+	// This was removed in Brackets 1.1.0
+	var version = /([0-9]+)\.([0-9]+)\.([0-9]+)/.exec(brackets.metadata.version);
+	if ((version[1] === '0') || (version[1] === '1' && version[2] === '0')) { // version[1] is major, version[2] is minor
+		$('body').addClass('icons-margin-correction');
+	}
+
+	ExtensionUtils.loadStyleSheet(module, 'styles/style.css');
+	ExtensionUtils.loadStyleSheet(module, 'styles/ionicons.min.css');
+
+	var provider = function (entry) {
 		if (!entry.isFile) {
 			return;
 		}
-		
+
 		var ext = entry.name;
 		var lastIndex = ext.lastIndexOf('.');
 		if (lastIndex >= 0) {
@@ -198,7 +219,7 @@ define(function(require, exports, module) {
 		} else {
 			ext = '';
 		}
-		
+
 		var data = fileInfo.hasOwnProperty(ext) ? fileInfo[ext] : getDefaultIcon(ext);
 
 		var $new = $('<ins>');
@@ -210,7 +231,7 @@ define(function(require, exports, module) {
 		});
 		return $new;
 	};
-	
+
 	FileTreeView.addIconProvider(provider);
 	WorkingSetView.addIconProvider(provider);
 });
