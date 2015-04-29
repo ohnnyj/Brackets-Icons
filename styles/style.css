@@ -18,7 +18,7 @@
 }
 
 .file-icon-c:before {
-	content: '{ }';
+	content: '{}';
 }
 
 .file-icon-rotated {
